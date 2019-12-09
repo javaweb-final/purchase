@@ -1,0 +1,7 @@
+分工：
+分为顾客，商家，和后台管理三个功能，分别由李明德，章晓昊，张翔负责编写。
+要全部实现题目要求，可以自己增添需求。
+有问题可以互相解决。
+使用Spring Boot框架。
+使用GitHUb管理项目。
+GitHub入门：比较详细https://blog.csdn.net/buknow/article/details/80325986。
