@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>购物系统首页</title>
-		<link type="text/css" rel="stylesheet" href="dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/animate.css" />
-	</head>
+        <link rel="stylesheet" type="text/css"  href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
+        <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}" />
+        <link rel="stylesheet" type="text/css" href="css/animate.css" th:href="@{/css/animate.css}" />
+    </head>
 
 	<body>
 		<!--导航部分  begin-->
@@ -26,7 +26,7 @@
 					<div class="collapse navbar-collapse" id="example-navbar-collapse">
 						<ul class="nav navbar-nav pull-left">
 							<li class="active">
-								<a href="index.html">首页</a>
+								<a href="index.html" th:href="@{/prod/index}">首页</a>
 							</li>
 					
 							<li>
@@ -37,32 +37,32 @@
 									</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="books_list.html">百货</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=1)}">百货</a>
 										</li>
 										<li class="divider"></li>
 										<li>
-											<a href="books_list.html">美妆</a>
+											<a href="products_list1.html" th:href="@{/prod/productList(category=2)}">美妆</a>
 										</li>
 										<li class="divider"></li>
 										
 										<li>
-											<a href="books_list.html">家具</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=3)}">家具</a>
 										</li>
 										<li class="divider"></li>
 										<li>
-											<a href="books_list.html">男装</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=4)}">男装</a>
 										</li>
 										<li class="divider"></li>
 										<li>
-											<a href="books_list.html">女装</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=5)}">女装</a>
 										</li>
 										<li class="divider"></li>
 										<li>
-											<a href="books_list.html">数码</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=6)}">数码</a>
 										</li>
 										<li class="divider"></li>
 										<li>
-											<a href="books_list.html">母婴</a>
+											<a href="products_list.html" th:href="@{/prod/productList(category=7)}">母婴</a>
 										</li>
 										<li class="divider"></li>
 									</ul>
@@ -134,553 +134,67 @@
 		<!--图书内容部分 begin-->
 		<div class="container">
 			<!--精选图书 begin-->
-			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
-					<a href="#">百货</a>
-				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/beiwei78.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>北纬78°</h3>
-								<p>价格:19.5元&nbsp;&nbsp;作者:陈丹燕&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/100dongjindarenweifaxian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>东京大人味发现</h3>
-								<p>价格:34.5元&nbsp;&nbsp;作者:吴东龙&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/biezouwanyihaoxiaone.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>别走！万一好笑呢？</h3>
-								<p>价格:26.3元&nbsp;&nbsp;作者:银教授&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/cikehuakai.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>此刻花开</h3>
-								<p>价格:34元&nbsp;&nbsp;作者:徐静&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+            <div>
+                <div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
+                    <a href="#">百货</a>
+                </div>
+                <!--加载数据-->
+                <div id="baihuo"></div>
+            </div>
 			<!--精选图书 end-->
 
-			<!--推荐图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">美妆</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/dongjian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>洞见</h3>
-								<p>价格:34.6元&nbsp;&nbsp;作者:项保华&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/tenxunchuan.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>腾讯传</h3>
-								<p>价格:40.1元&nbsp;&nbsp;作者:吴晓波&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/woyushijiezhichayigeni.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>我与世界只差一个你</h3>
-								<p>价格:38.7元&nbsp;&nbsp;作者:张皓宸&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaoshouxinlizhan.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>销售心理战</h3>
-								<p>价格:18.4元&nbsp;&nbsp;作者:霍金斯&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li class="disabled">
-								<a href="#">&larr;上一页</a>
-							</li>
-							<li>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="meizhuang"></div>
 			</div>
 			<!--推荐图书end..-->
 
 			<!--特价图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">家具</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>小道理：分寸之战</h3>
-								<p>价格:33.10元&nbsp;&nbsp;作者:冯仑&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/yuannideqingchunbufumengxiang.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>愿你的青春不负梦想</h3>
-								<p>价格:21.6元&nbsp;&nbsp;作者:俞敏洪&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/NO SECRETS.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>名创优品没有秘密</h3>
-								<p>价格:27元&nbsp;&nbsp;作者:杜博奇&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiegeinianqinrende1.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>写给年轻人的创业课</h3>
-								<p>价格:19.9元&nbsp;&nbsp;作者:彭帅兴&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="jiaju"></div>
 			</div>
 			<!--特价图书 end-->
 			<!--特价图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">男装</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>小道理：分寸之战</h3>
-								<p>价格:33.10元&nbsp;&nbsp;作者:冯仑&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/yuannideqingchunbufumengxiang.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>愿你的青春不负梦想</h3>
-								<p>价格:21.6元&nbsp;&nbsp;作者:俞敏洪&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/NO SECRETS.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>名创优品没有秘密</h3>
-								<p>价格:27元&nbsp;&nbsp;作者:杜博奇&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiegeinianqinrende1.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>写给年轻人的创业课</h3>
-								<p>价格:19.9元&nbsp;&nbsp;作者:彭帅兴&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="nanzhuang"></div>
 			</div>
 			<!--特价图书 end-->
 			<!--特价图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">女装</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>小道理：分寸之战</h3>
-								<p>价格:33.10元&nbsp;&nbsp;作者:冯仑&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/yuannideqingchunbufumengxiang.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>愿你的青春不负梦想</h3>
-								<p>价格:21.6元&nbsp;&nbsp;作者:俞敏洪&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/NO SECRETS.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>名创优品没有秘密</h3>
-								<p>价格:27元&nbsp;&nbsp;作者:杜博奇&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiegeinianqinrende1.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>写给年轻人的创业课</h3>
-								<p>价格:19.9元&nbsp;&nbsp;作者:彭帅兴&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="nvzhuang"></div>
 			</div>
 			<!--特价图书 end-->
 			<!--特价图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">数码</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>小道理：分寸之战</h3>
-								<p>价格:33.10元&nbsp;&nbsp;作者:冯仑&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/yuannideqingchunbufumengxiang.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>愿你的青春不负梦想</h3>
-								<p>价格:21.6元&nbsp;&nbsp;作者:俞敏洪&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/NO SECRETS.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>名创优品没有秘密</h3>
-								<p>价格:27元&nbsp;&nbsp;作者:杜博奇&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiegeinianqinrende1.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>写给年轻人的创业课</h3>
-								<p>价格:19.9元&nbsp;&nbsp;作者:彭帅兴&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="shuma"></div>
 			</div>
 			<!--特价图书 end-->
 			<!--特价图书 begin-->
 			<div>
-				<div class="text-primary"><img src="images/bullet1.gif" alt="" title="">
+				<div class="text-primary"><img src="images/bullet1.gif" th:src="@{/images/bullet1.gif}" alt="" title="">
 					<a href="#">母婴</a>
 				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>小道理：分寸之战</h3>
-								<p>价格:33.10元&nbsp;&nbsp;作者:冯仑&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInLeft animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/yuannideqingchunbufumengxiang.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>愿你的青春不负梦想</h3>
-								<p>价格:21.6元&nbsp;&nbsp;作者:俞敏洪&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/NO SECRETS.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>名创优品没有秘密</h3>
-								<p>价格:27元&nbsp;&nbsp;作者:杜博奇&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6 col-md-3 wow fadeInRight animated">
-						<div class="thumbnail">
-							<a href="details.html"><img src="images/xiegeinianqinrende1.jpg" alt="通用的占位符缩略图"></a>
-							<div class="caption">
-								<h3>写给年轻人的创业课</h3>
-								<p>价格:19.9元&nbsp;&nbsp;作者:彭帅兴&nbsp;&nbsp;</p>
-								<p>
-									<a href="details.html">
-										更多信息
-									</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!--分页-->
-					<div class="container">
-						<ul class="pager">
-							<li>
-								<a href="#">&larr;上一页</a>
-								<a href="#">下一页 &rarr;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<!--加载数据-->
+				<div id="muying"></div>
 			</div>
 			<!--特价图书 end-->
 			<hr>
@@ -779,7 +293,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-						<h4 class="modal-title" id="myModalLabel">
+						<h4 class="modal-title" id="regModalLabel">
 					用户注册
 				</h4>
 					</div>
@@ -789,7 +303,7 @@
 							<div class="form-group has-feedback">
 								<label for="firstname" class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="firstname" required placeholder="小写字母开头,不含中文.">
+									<input type="text" class="form-control"  required placeholder="小写字母开头,不含中文." th:onblur="|checkUser(this)|">
 									<span class="glyphicon glyphicon-user form-control-feedback"></span>
 								</div>
 								<!--<div class="col-sm-3" style="padding-top: 10px;">
@@ -799,7 +313,7 @@
 							<div class="form-group has-feedback">
 								<label for="lastname" class="col-sm-2 control-label">密码</label>
 								<div class="col-sm-5">
-									<input type="password" class="form-control" id="lastname" placeholder="密码长度6-8位" minlength="6" maxlength="8">
+									<input type="password" class="form-control"  placeholder="密码长度6-8位" minlength="6" maxlength="8">
 									<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 								</div>
 								<!--<div class="col-sm-3" style="padding-top: 10px;">
@@ -817,7 +331,7 @@
 							<div class="form-group has-feedback">
 								<label class="col-sm-2 control-label">邮箱</label>
 								<div class="col-sm-5">
-									<input type="email" class="form-control" id="email" placeholder="合法邮箱格式">
+									<input type="email" class="form-control" placeholder="合法邮箱格式">
 									<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 								</div>
 							</div>
@@ -825,7 +339,7 @@
 							<div class="form-group has-feedback">
 								<label class="col-sm-2 control-label">电话</label>
 								<div class="col-sm-5">
-									<input type="tel" class="form-control" id="email" placeholder="合法手机格式">
+									<input type="tel" class="form-control" placeholder="合法手机格式">
 									<span class="glyphicon glyphicon-earphone form-control-feedback"></span>
 								</div>
 							</div>
@@ -833,18 +347,18 @@
 							<div class="form-group has-feedback">
 								<label class="col-sm-2 control-label">公司</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="email" placeholder="请输入公司地址">
+									<input type="text" class="form-control"  placeholder="请输入公司地址">
 									<span class="glyphicon glyphicon-home form-control-feedback"></span>
 								</div>
 							</div>
 
-							<div class="form-group has-feedback">
-								<label class="col-sm-2 control-label">地址</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="email" placeholder="请输入收货">
-									<span class="glyphicon glyphicon-home form-control-feedback"></span>
-								</div>
-							</div>
+							<!--<div class="form-group has-feedback">-->
+								<!--<label class="col-sm-2 control-label">地址</label>-->
+								<!--<div class="col-sm-5">-->
+									<!--<input type="text" class="form-control" id="email" placeholder="请输入收货">-->
+									<!--<span class="glyphicon glyphicon-home form-control-feedback"></span>-->
+								<!--</div>-->
+							<!--</div>-->
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -857,15 +371,54 @@
 				<!-- /.modal-content -->
 			</div>
 		</div>
-		
-		<script src="dist/js/jquery.min.js"></script>
-		<script src="js/carousel.js" type="text/javascript" charset="utf-8"></script>
-		<script src="dist/js/bootstrap.min.js"></script>
-		<script src="js/wow.js"></script>
+
+		<script src="dist/js/jquery.min.js" th:src="@{/dist/js/jquery.min.js}"></script>
+		<script src="js/carousel.js" th:src="@{/js/carousel.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.min.js}"></script>
+		<script src="js/wow.js" th:src="@{/js/wow.js}"></script>
+		<script th:src="@{/js/login_reg.js}"></script>
+		<script th:inline="javascript">
+			//获取应用路径
+			var contextPath = [[${#request.getContextPath()}]];
+		</script>
+
 		<script type="text/javascript">
 			if(!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
 				new WOW().init();
 			};
+			function buildQuery(page,category) {
+				var query = {};
+				query.page = typeof page == "undefined" ? 1 : page;
+				query.category = category;
+				return query;
+			}
+			$(function () {
+				$("#baihuo").load( contextPath + "/prod/getProductData",buildQuery(1,1));
+				$("#meizhuang").load( contextPath + "/prod/getProductData",buildQuery(1,2));
+				$("#jiaju").load( contextPath + "/prod/getProductData",buildQuery(1,3));
+				$("#nanzhuang").load( contextPath + "/prod/getProductData",buildQuery(1,4));
+				$("#nvzhuang").load( contextPath + "/prod/getProductData",buildQuery(1,5));
+				$("#shuma").load( contextPath + "/prod/getProductData",buildQuery(1,6));
+				$("#muying").load( contextPath + "/prod/getProductData",buildQuery(1,7));
+
+
+			})
+			//加载其他页数据
+			function loadData(page,category) {
+				var node;
+				if(category == 1){
+					node = "selected";
+				} else if(category == 2) {
+					node = "recommend";
+				}else {
+					node = "bargain";
+				}
+				$("#" + node).load(contextPath + "/book/getBookData",buildQuery(page,category));
+			}
+
+			function checkUser(obj) {
+				alert(obj.value);
+			}
 		</script>
 	</body>
 
