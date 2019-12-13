@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
 		<title>我的购物车</title>
-		<link type="text/css" rel="stylesheet" href="dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/cart.css" />
-		<link rel="stylesheet" type="text/css" href="css/animate.css" />
+		<link rel="stylesheet" type="text/css"  href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" type="text/css" href="css/cart.css" th:href="@{/css/cart.css}" />
 	</head>
 
 	<body onload="changeNum()">
@@ -166,51 +166,16 @@
 							</tr>
 						</thead>
 						<tbody id="tby">
-							<tr>
+							<tr th:each="cart:${cartList}">
 								<td><input type="checkbox" name="cks"></td>
-								<td>1001</td>
-								<td><img src="images/tenxunchuan.jpg"></td>
-								<td>腾讯传</td>
-								<td>35.0元</td>
-								<td>7</td>
-								<td>100$</td>
+								<td th:text="${cart.thingId}">1001</td>
+								<td><img src="images/tenxunchuan.jpg" th:src="@{'/public/' + ${cart.imgUrl}}"></td>
+								<td th:text="${cart.thingName}">腾讯传</td>
+								<td th:text="${cart.newPrice + '元'}">35.0元</td>
+								<td th:text="${cart.count}">7</td>
+								<td th:text="${cart.newPrice * cart.count}">100$</td>
 							</tr>
-							<tr>
-								<td><input type="checkbox" name="cks"></td>
-								<td>1002</td>
-								<td><img src="images/ouzhou.jpg"></td>
-								<td>欧洲</td>
-								<td>35.0元</td>
-								<td>5</td>
-								<td>100$</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="cks"></td>
-								<td>1003</td>
-								<td><img src="images/taikong.jpg"></td>
-								<td>太空</td>
-								<td>35.0元</td>
-								<td>5</td>
-								<td>100$</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="cks"></td>
-								<td>1004</td>
-								<td><img src="images/NO SECRETS.jpg"></td>
-								<td>NO SECRETS</td>
-								<td>35.0元</td>
-								<td>6</td>
-								<td>100$</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="cks"></td>
-								<td>1005</td>
-								<td><img src="images/xizang.jpg"></td>
-								<td>西藏</td>
-								<td>35.0元</td>
-								<td>5</td>
-								<td>100$</td>
-							</tr>
+
 						</tbody>
 						<tfoot>
 							<tr>
@@ -363,16 +328,83 @@
 		<!--end-->
 
 		<!--引入js文件-->
-		<script src="dist/js/jquery.min.js"></script>
-		<script src="js/wow.js"></script>
-		<script src="js/carousel.js" type="text/javascript"></script>
-		<script src="dist/js/bootstrap.min.js"></script>
-		<script src="js/details.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/cart.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/jquery.min.js" th:src="@{/dist/js/jquery.min.js}"></script>
+		<script src="js/carousel.js" th:src="@{/js/carousel.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.min.js}"></script>
+		<script src="js/wow.js" th:src="@{/js/wow.js}"></script>
+		<script src="js/details.js" th:src="@{/js/details.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="js/cart.js" th:src="@{/js/cart.js}" type="text/javascript" charset="utf-8"></script>
+		<script th:inline="javascript">
+			//获取应用路径
+			var contextPath = [[${#request.getContextPath()}]];
+		</script>
 		<script type="text/javascript">
 			if(!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
 				new WOW().init();
 			};
+
+			//修改商品数量
+			function minus(cartId,price,index) {
+				//数量减一
+				var count = parseInt($("#cartCount"+index).val());
+				var _price = parseFloat(price);
+				if (count != 1){
+					$("#cartCount"+index).val(count - 1);
+					$("#cartPrice" + index).html((count - 1) * _price);
+					updateCart(cartId,count - 1);
+				}
+
+
+			}
+
+			//增加数量
+			function plus(cartId,price,index) {
+				//数量加一
+				var count = parseInt($("#cartCount"+index).val());
+				var _price = parseFloat(price);
+				$("#cartCount"+index).val(count + 1);
+				$("#cartPrice" + index).html((count + 1) * _price);
+				updateCart(cartId,count + 1);
+			}
+
+			//修改后台购物车记录
+			function updateCart(cartId,count) {
+				$.ajax({
+					url: contextPath + "/cart/update",
+					data:{"id":cartId,"count":count},
+					method:"post",
+					success:function (data) {
+						$("#total").html('总价' + data + '元');
+						$(".cartPrice").html(data);
+					}
+				})
+			}
+
+			//确认订单
+			function confirmOrder() {
+				//存储购物记录的id
+				var ids = '';
+
+				var thirdModel = document.getElementById("third_del");
+				//判断是否选择了商品
+				var count = 0;
+				//获取所有的checkbox
+				var cks = document.getElementsByName("cks");
+				//遍历
+				for(var i = 0; i < cks.length; i++) {
+					if(cks[i].checked) {
+						count++;
+						ids += cks[i].value + ",";
+					}
+				}
+				if(count == 0) {
+					alert('请选择图书！');
+					// thirdModel.style.display = "block";
+					// $("#third_del").css("display","block");
+				} else {
+					window.location.href = contextPath + '/order/confirm?ids=' + ids.substring(0,ids.length-1);
+				}
+			}
 		</script>
 	</body>
 
