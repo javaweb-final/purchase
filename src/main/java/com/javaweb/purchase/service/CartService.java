@@ -8,6 +8,7 @@ import com.javaweb.purchase.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +28,19 @@ public class CartService extends ServiceImpl<CartMapper, Cart> {
      * 根据购物车id查询对应的纪录
      */
     public List<CartVo> findCartByIds(String ids){
-        return cartMapper.findCartListByIds(Arrays.asList(ids));
+
+        String id[]=ids.split(",");
+        Integer in[]=new Integer[id.length];
+        for (int i=0;i<id.length;i++){
+            in[i]=Integer.valueOf(id[i]);
+        }
+        List<Integer> list=new ArrayList<>();
+        for (Integer i:in){
+            list.add(i);
+        }
+//        return cartMapper.findCartListByIds(Arrays.asList(ids));
+        return cartMapper.findCartListByIds(list);
+
     }
     /**
      * 统计购物车总价

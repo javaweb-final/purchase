@@ -5,6 +5,8 @@ $(function() {
 	});
 });
 
+//存储购物记录的id
+var ids = '';
 //实现全选功能
 function selectAll(obj) {
 	//获取所有的checkbox
@@ -35,6 +37,7 @@ function del() {
 	for(var i = 0; i < cks.length; i++) {
 		if(cks[i].checked) {
 			count++;
+			ids += cks[i].value + ",";
 		}
 	}
 	if(count == 0) {
@@ -163,4 +166,15 @@ function delRows(obj){
 	}
 	//调用关闭按钮的单击事件
 	obj.previousElementSibling.click();
+	//提交到后台删除记录
+	$.ajax({
+		url: contextPath + '/cart/delete',
+		data:{'ids':ids.substring(0,ids.length-1)},
+		method:"post",
+		success:function (data) {
+			if(data == 'success'){
+				window.location.href= contextPath + "/cart/list";
+			}
+		}
+	})
 }

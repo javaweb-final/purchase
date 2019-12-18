@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:each="evaluate:${evaluateList}">
+        <li class="list-group-item">
+            <span class="text-info">小明:</span>
+            <span class="text-success " th:text="${evaluate.detail}">这真的是一本好书</span>
+        </li>
+    </div>
+
+
+
+    <!--<p>-->
+    <!--<ul class="pager">-->
+        <!--<li>-->
+            <!--<a href="# ">&larr;上一页</a>-->
+            <!--<a href="# ">下一页 &rarr;</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--</p>-->
+
+</body>
+</html>

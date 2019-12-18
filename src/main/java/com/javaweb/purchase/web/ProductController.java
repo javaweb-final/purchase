@@ -1,6 +1,9 @@
 package com.javaweb.purchase.web;
 
+import com.javaweb.purchase.entity.Evaluate;
 import com.javaweb.purchase.entity.Product;
+import com.javaweb.purchase.entity.User;
+import com.javaweb.purchase.service.EvaluateService;
 import com.javaweb.purchase.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,8 @@ import org.springframework.ui.Model;
 public class ProductController {
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private EvaluateService evaluateService;
     @RequestMapping("/index")
     public String index() {
         return "index";
@@ -70,7 +74,22 @@ public class ProductController {
     @RequestMapping("/detail")
     public String detail(Integer id,Model model){
         Product product = productService.getById(id);
+        //add
+        QueryWrapper<Evaluate> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("thing_id",id);
+
+        IPage<Evaluate> iPage=evaluateService.page(new Page<>(1,4),queryWrapper);
+        model.addAttribute("evaluateList",iPage.getRecords());
         model.addAttribute("product",product);
+
         return "details";
     }
+//    @RequestMapping("/getEvaluateData")
+//    public String getEvaluateData(Integer id,Model model){
+//        QueryWrapper<Evaluate> queryWrapper=new QueryWrapper<>();
+//        queryWrapper.eq("thing_id",id);
+//        IPage<Evaluate> iPage=evaluateService.page(new Page<>(1,4),queryWrapper);
+//        model.addAttribute("evaluateList",iPage.getRecords());
+//        return "evaluateData";
+//    }
 }

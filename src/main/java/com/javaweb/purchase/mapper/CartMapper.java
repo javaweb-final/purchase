@@ -23,6 +23,7 @@ public interface CartMapper extends BaseMapper<Cart> {
     List<CartVo> findCartListByUserId(Integer userId);
 
     @Select({
+//            "SELECT  c.*, p.NAME AS productName, p.img_url AS img_url, p.new_price AS new_price FROM cart c LEFT JOIN thing p ON c.thing_id = p.id WHERE c.id in (#{ids})"
             "<script>" +
                     "SELECT\n" +
                     "\tc.*, p.NAME AS productName, p.img_url AS img_url,\n" +
@@ -34,7 +35,7 @@ public interface CartMapper extends BaseMapper<Cart> {
                     "<foreach item='item' collection='ids' open='(' separator=',' close=')' >" +
                     "#{item}" +
                     "</foreach>" +
-                    "</script>"
+             "</script>"
     })
-    List<CartVo> findCartListByIds(@Param("ids") List<String> ids);
+    List<CartVo> findCartListByIds(@Param("ids") List<Integer> ids);
 }
