@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 12/12/2019 09:43:31
+ Date: 20/12/2019 11:11:26
 */
 
 SET NAMES utf8mb4;
@@ -22,17 +22,51 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `area` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `detail_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `is_default` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
+  `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `u`(`user_id`) USING BTREE,
+  CONSTRAINT `u` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of address
+-- ----------------------------
+INSERT INTO `address` VALUES (1, '潍城区', '潍坊站', '李浪', '18988885555', '1', 1, '山东省', '潍坊市');
+INSERT INTO `address` VALUES (2, '历下区', '天安门', '李浪', '19936658888', NULL, 1, '山东省', '济南市');
+INSERT INTO `address` VALUES (3, '东城区', '天安门', '李浪', '18855556666', NULL, 1, '北京市', '北京市');
+INSERT INTO `address` VALUES (4, '和平区', '化工厂', '李狼', '15569995556', NULL, 2, '天津市', '天津市');
+INSERT INTO `address` VALUES (5, '兴宁区', '123', 'qq ww', '19936653856', NULL, 7, '广西壮族自治区', '南宁市');
+INSERT INTO `address` VALUES (6, '历下区', '江西', 'qq ww', '19936653856', NULL, 8, '山东省', '济南市');
+
+-- ----------------------------
+-- Table structure for bbs
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs`;
+CREATE TABLE `bbs`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `info` varchar(2555) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `ewfewfewf`(`user_id`) USING BTREE,
+  CONSTRAINT `ewfewfewf` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bbs
+-- ----------------------------
+INSERT INTO `bbs` VALUES (1, 5, '华为Mate30', '感觉在商城买的好像不是正品', '2019-12-18 18:11:04');
+INSERT INTO `bbs` VALUES (2, 3, '剪刀', '这次买的见到很锋利，也非常好', '2019-12-18 18:12:26');
+INSERT INTO `bbs` VALUES (13, 2, 'hhhhh', '416513', '2019-12-19 02:27:51');
 
 -- ----------------------------
 -- Table structure for boss
@@ -40,94 +74,158 @@ CREATE TABLE `address`  (
 DROP TABLE IF EXISTS `boss`;
 CREATE TABLE `boss`  (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `shopname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `thing`(`name`) USING BTREE
+  INDEX `thing`(`shopname`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of boss
 -- ----------------------------
-INSERT INTO `boss` VALUES (1, '华为官方旗舰店');
-INSERT INTO `boss` VALUES (8, '华硕旗舰店');
-INSERT INTO `boss` VALUES (4, '家具自营店');
-INSERT INTO `boss` VALUES (7, '小米官方旗舰店');
-INSERT INTO `boss` VALUES (9, '数码自营店');
-INSERT INTO `boss` VALUES (5, '服装自营店');
-INSERT INTO `boss` VALUES (6, '母婴自营店');
-INSERT INTO `boss` VALUES (2, '百货自营店');
-INSERT INTO `boss` VALUES (3, '美妆自营店');
+INSERT INTO `boss` VALUES (1, '华为官方旗舰店', 'huawei', '123456');
+INSERT INTO `boss` VALUES (2, '百货自营店', 'baihuo', '123456');
+INSERT INTO `boss` VALUES (3, '美妆自营店', 'meizhuang', '123456');
+INSERT INTO `boss` VALUES (4, '家具自营店', 'jiaju', '123456');
+INSERT INTO `boss` VALUES (5, '服装自营店', 'fuzhuang', '123456');
+INSERT INTO `boss` VALUES (6, '母婴自营店', 'muying', '123456');
+INSERT INTO `boss` VALUES (7, '小米官方旗舰店', 'xiaomi', '123456');
+INSERT INTO `boss` VALUES (8, '华硕旗舰店', 'huashuo', '123456');
+INSERT INTO `boss` VALUES (9, '数码自营店', 'shuma', '123456');
 
 -- ----------------------------
 -- Table structure for cart
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NULL DEFAULT NULL,
   `thing_id` int(11) NULL DEFAULT NULL,
   `count` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `thing1`(`thing_id`) USING BTREE,
-  INDEX `user1`(`user_id`) USING BTREE,
-  CONSTRAINT `thing1` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `u1`(`user_id`) USING BTREE,
+  INDEX `t1`(`thing_id`) USING BTREE,
+  CONSTRAINT `t1` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `u1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
+INSERT INTO `cart` VALUES (7, 5, 2, 2);
 
 -- ----------------------------
 -- Table structure for evaluate
 -- ----------------------------
 DROP TABLE IF EXISTS `evaluate`;
 CREATE TABLE `evaluate`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `thing_id` int(11) NULL DEFAULT NULL,
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `star_num` int(11) NULL DEFAULT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `thing2`(`thing_id`) USING BTREE,
-  CONSTRAINT `thing2` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `th2`(`thing_id`) USING BTREE,
+  INDEX `ghg`(`user_id`) USING BTREE,
+  CONSTRAINT `ghg` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `th2` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for order
+-- Records of evaluate
 -- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order`  (
-  `id` int(11) NOT NULL,
-  `order_num` int(11) NULL DEFAULT NULL,
+INSERT INTO `evaluate` VALUES (1, 2, '收到了，宝贝不错', 1);
+INSERT INTO `evaluate` VALUES (2, 2, '大家千万不要买，真的太垃圾了', 2);
+INSERT INTO `evaluate` VALUES (3, 1, '是正品', 4);
+INSERT INTO `evaluate` VALUES (4, 2, '不错的', 3);
+INSERT INTO `evaluate` VALUES (5, 3, '质量还可以', 6);
+INSERT INTO `evaluate` VALUES (6, 4, '不行，太垃圾了', 5);
+INSERT INTO `evaluate` VALUES (7, 1, '真的很酷', 6);
+INSERT INTO `evaluate` VALUES (8, 2, '11', 2);
+INSERT INTO `evaluate` VALUES (9, 2, '11', 2);
+INSERT INTO `evaluate` VALUES (10, 7, '给女朋友的', 2);
+INSERT INTO `evaluate` VALUES (11, 7, '不错', 7);
+INSERT INTO `evaluate` VALUES (12, 3, '给女朋友的', 2);
+
+-- ----------------------------
+-- Table structure for order1
+-- ----------------------------
+DROP TABLE IF EXISTS `order1`;
+CREATE TABLE `order1`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `create_date` datetime(0) NULL DEFAULT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
   `address_id` int(11) NULL DEFAULT NULL,
   `order_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `us`(`user_id`) USING BTREE,
-  INDEX `addre`(`address_id`) USING BTREE,
-  CONSTRAINT `addre` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `us` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `ewf`(`user_id`) USING BTREE,
+  INDEX `rrhythty`(`address_id`) USING BTREE,
+  CONSTRAINT `ewf` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `rrhythty` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for oredr_item
+-- Records of order1
 -- ----------------------------
-DROP TABLE IF EXISTS `oredr_item`;
-CREATE TABLE `oredr_item`  (
-  `id` int(11) NOT NULL,
+INSERT INTO `order1` VALUES (10, '2019121617220001', '2019-12-16 09:22:01', 2, 4, '1');
+INSERT INTO `order1` VALUES (11, '2019121617220002', '2019-12-16 09:22:32', 2, 4, '1');
+INSERT INTO `order1` VALUES (12, '2019121617310001', '2019-12-16 09:31:24', 2, 4, '1');
+INSERT INTO `order1` VALUES (13, '2019121617330001', '2019-12-16 09:33:43', 2, 4, '1');
+INSERT INTO `order1` VALUES (14, '2019121720150001', '2019-12-17 12:15:17', 7, 5, '1');
+INSERT INTO `order1` VALUES (15, '2019121811170001', '2019-12-18 03:17:27', 2, 4, '1');
+INSERT INTO `order1` VALUES (16, '2019121814100001', '2019-12-18 06:10:52', 8, 6, '1');
+INSERT INTO `order1` VALUES (17, '2019121910280001', '2019-12-19 02:28:57', 2, 4, '1');
+
+-- ----------------------------
+-- Table structure for order_item
+-- ----------------------------
+DROP TABLE IF EXISTS `order_item`;
+CREATE TABLE `order_item`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NULL DEFAULT NULL,
   `thing_id` int(11) NULL DEFAULT NULL,
   `count` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `use`(`order_id`) USING BTREE,
-  INDEX `th`(`thing_id`) USING BTREE,
-  CONSTRAINT `th` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `use` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `yyugug`(`order_id`) USING BTREE,
+  INDEX `ycyfdyt`(`thing_id`) USING BTREE,
+  CONSTRAINT `ycyfdyt` FOREIGN KEY (`thing_id`) REFERENCES `thing` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `yyugug` FOREIGN KEY (`order_id`) REFERENCES `order1` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order_item
+-- ----------------------------
+INSERT INTO `order_item` VALUES (1, 10, 2, 2);
+INSERT INTO `order_item` VALUES (2, 10, 13, 2);
+INSERT INTO `order_item` VALUES (3, 11, 7, 1);
+INSERT INTO `order_item` VALUES (4, 12, 8, 2);
+INSERT INTO `order_item` VALUES (5, 13, 16, 1);
+INSERT INTO `order_item` VALUES (6, 14, 7, 1);
+INSERT INTO `order_item` VALUES (7, 15, 2, 2);
+INSERT INTO `order_item` VALUES (8, 16, 2, 2);
+INSERT INTO `order_item` VALUES (9, 17, 3, 1);
+
+-- ----------------------------
+-- Table structure for superadmin
+-- ----------------------------
+DROP TABLE IF EXISTS `superadmin`;
+CREATE TABLE `superadmin`  (
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of superadmin
+-- ----------------------------
+INSERT INTO `superadmin` VALUES ('test', '123456');
 
 -- ----------------------------
 -- Table structure for thing
 -- ----------------------------
 DROP TABLE IF EXISTS `thing`;
 CREATE TABLE `thing`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `boss_id` int(11) NULL DEFAULT NULL,
   `old_price` decimal(10, 2) NULL DEFAULT NULL,
@@ -136,9 +234,9 @@ CREATE TABLE `thing`  (
   `info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `img_url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `bos`(`boss_id`) USING BTREE,
-  CONSTRAINT `bos` FOREIGN KEY (`boss_id`) REFERENCES `boss` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `rtt`(`boss_id`) USING BTREE,
+  CONSTRAINT `rtt` FOREIGN KEY (`boss_id`) REFERENCES `boss` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of thing
@@ -172,18 +270,32 @@ INSERT INTO `thing` VALUES (26, '婴儿指甲钳', 6, 36.00, 19.00, '7', '婴儿
 INSERT INTO `thing` VALUES (27, '两用棉签', 6, 15.00, 9.00, '7', '棉签，呵护肌肤', 'mianqian.jpg');
 INSERT INTO `thing` VALUES (28, '婴儿背带', 6, 55.00, 39.00, '7', '婴儿背带，安全', 'beidai.jpg');
 INSERT INTO `thing` VALUES (29, '纸尿裤10片', 6, 99.00, 59.00, '7', '纸尿裤', 'zhiniaoku.jpg');
+INSERT INTO `thing` VALUES (30, 'lmd', 1, 23.00, 12.00, '1', 'dvrtrvrv', NULL);
+INSERT INTO `thing` VALUES (31, 'lmd', 1, 23.00, 12.00, '1', 'dvrtrvrv', NULL);
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `company` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (1, 'jack', '123456', '15966106855', 'ncu');
+INSERT INTO `user` VALUES (2, '6109117123', '123456', '19936653856', 'ncu');
+INSERT INTO `user` VALUES (3, '1250445798', '123456', '19936653856', 'ncu');
+INSERT INTO `user` VALUES (4, 'zs', '123456', '18936653856', 'ncu');
+INSERT INTO `user` VALUES (5, '18923729888', '123456', '18923729888', 'ncu');
+INSERT INTO `user` VALUES (6, '125044579', '123456', '19936653856', '新日暮里');
+INSERT INTO `user` VALUES (7, 'ly', '123456', '18923711111', '南昌大学');
+INSERT INTO `user` VALUES (8, '6109117122', '123456', '19936653856', 'ncu');
 
 SET FOREIGN_KEY_CHECKS = 1;
