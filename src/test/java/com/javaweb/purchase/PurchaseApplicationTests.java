@@ -1,8 +1,11 @@
 package com.javaweb.purchase;
 
+import com.javaweb.purchase.entity.Bbs;
 import com.javaweb.purchase.entity.Evaluate;
+import com.javaweb.purchase.mapper.BbsMapper;
 import com.javaweb.purchase.mapper.CartMapper;
 import com.javaweb.purchase.mapper.OrderMapper;
+import com.javaweb.purchase.service.BbsService;
 import com.javaweb.purchase.service.EvaluateService;
 import com.javaweb.purchase.service.ProductService;
 import org.junit.Test;
@@ -10,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -27,7 +32,8 @@ public class PurchaseApplicationTests {
     private OrderMapper orderMapper;
     @Autowired
     private EvaluateService evaluateService;
-
+    @Autowired
+    private BbsMapper bbsMapper;
 //    @Test
 //    public void contextLoads() {
 //    }
@@ -38,7 +44,11 @@ public class PurchaseApplicationTests {
     @Test
     public void findOrderList(){
 //        orderMapper.findOrderAndOrderDetailListByUser()
-        evaluateService.findUserOrder(2,9).forEach(System.out::print);
+//        evaluateService.findUserOrder(2,9).forEach(System.out::print);
+        List<Bbs> l=bbsMapper.selectList(null);
+        l.forEach(System.out::println);
+
+
     }
 
 

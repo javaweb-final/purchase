@@ -36,7 +36,7 @@ public class EvaluateController {
         model.addAttribute("evaluateList",iPage.getRecords());
         return "evaluateData";
     }
-
+    @ResponseBody
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(HttpServletRequest request, HttpSession session){
         User user = (User) session.getAttribute("user");

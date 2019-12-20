@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>购物系统首页</title>
+		<link type="text/css" rel="stylesheet" href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}"/>
+		<link rel="stylesheet" type="text/css" href="css/animate.css" th:href="@{/css/animate.css}"/>
+		<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}"/>
+    	<link rel="stylesheet" href="css/public.css" th:href="@{/css/public.css}"/>
+    	<link rel="stylesheet" href="css/pastindex.css" th:href="@{/css/pastindex.css}"/>
+	</head>
+
+	<body>
+		<!--导航部分  begin-->
+		<div th:replace="common/header :: header"></div>
+		<!--导航部分 end-->
+
+		<!--最顶端轮播图片 begin-->
+		<div th:replace="common/carousel :: carousel"></div>
+		<!--最顶端轮播图片 end--> 
+		<div class="container">
+			<!--左边-->
+			<div class="col-md-8 col-sm-12">
+
+				<div class="indexMain_left_con" th:each="bbs:${bbsdata}">
+				<!--无主题图循环开始-->
+					<div class="indexCon_msg">
+						<div class="indexCon_msg_detail">
+							<a href="" th:href="@{/bbs/info(id=${bbs.id})}">
+								<div class="indexCon_msg_detail_tittle">
+
+									<p th:text="${bbs.title}">关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
+								</div>
+							</a>
+							<div class="indexCon_msg_detail_other">
+								<ul>
+									<li th:text="${bbs.username}">花开花落</li>
+									<li th:text="${#calendars.format(bbs.time,'yyyy-MM-dd HH:mm:ss')}">1天前</li>
+
+								</ul>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+            <!--无主题图循环结束-->
+					<!--无主题图循环开始-->
+					<div class="indexCon_msg">
+
+						<div class="indexCon_msg_detail">
+							<a href="">
+								<div class="indexCon_msg_detail_tittle">
+									<span>竞拍</span>
+									<p>关注上海车牌竞拍方面的资讯，对当月竞拍分析发表独到见解</p>
+								</div>
+							</a>
+							<div class="indexCon_msg_detail_other">
+								<ul>
+									<li>花开花落</li>
+									<li>1天前</li>
+									<li>21</li>
+									<li>28</li>
+								</ul>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<!--无主题图循环结束-->
+
+            	</div>
+			</div>
+			<div class="col-md-4 col-sm-3 col-xs-8">
+				<ol class="breadcrumb ">
+					<li>
+						<a href="# " class="text-success "><span class="glyphicon glyphicon-shopping-cart "></span>我的购物车</a>
+					</li>
+					<li>
+						<a href="# ">3个商品</a>
+					</li>
+					<li>
+						<a href="# ">总价100元</a>
+					</li>
+				</ol>
+
+				<!--猜您喜欢-->
+				<div>
+					<span class="text-info"><span class="glyphicon glyphicon-heart"></span><span style="font-size: 20px; ">猜您喜欢</span></span>
+					<div class="row" id="love">
+						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
+							<div class="thumbnail">
+								<a href="details.html"><img src="images/xiaodaolifencunzhijian.jpg " style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<div class="caption ">
+									<h3>小道理：分寸之间</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
+							<div class="thumbnail ">
+								<a href="details.html"><img src="images/NO SECRETS.jpg " style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<div class="caption ">
+									<h3>名创优品没有秘密</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
+							<div class="thumbnail ">
+								<a href="details.html"><img src="images/maichanpinjiushimaiziji.jpg" style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<div class="caption ">
+									<h3>卖产品就是卖自己</h3>
+								</div>
+							</div>
+						</div>
+						<div>
+							<ul class="pager ">
+								<li>
+									<a href="# " onclick="pageUp() ">&larr;上一页</a>
+									<a href="# " onclick="pageDown() ">下一页 &rarr;</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- <div class="container"-->
+		<hr>
+			<!--首页底部信息 begin-->
+
+		<div class="container">
+			<!--首页底部信息 begin-->
+			<div th:replace="common/footer :: footer"></div>
+		</div>
+		<!--end-->
+		<div th:replace="common/userModal :: userModal"></div>
+		<script src="js/jquery-1.8.3.min.js" th:src="@{'/public/js/jquery-1.8.3.min.js'}"></script>
+		<script src="dist/js/jquery.min.js" th:src="@{/dist/js/jquery.min.js}"></script>
+		<script src="js/carousel.js" th:src="@{/js/carousel.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="dist/js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.min.js}"></script>
+		<script src="js/wow.js" th:src="@{/js/wow.js}"></script>
+		<script th:inline="javascript">
+			var contextPath = [[${#request.getContextPath()}]];
+			var user = [[${session.user}]];
+		</script>
+		<script th:src="@{/js/login_reg.js}"></script>
+
+		<script>
+			$(".indexMain_left_btn li a").click(function(){
+				$(".indexMain_left_btn li a").removeClass("on");
+				$(this).addClass("on");
+			});
+			window.onscroll=function(){
+				var scrolls=document.body.scrollTop||document.documentElement.scrollTop;
+				var slided=60;
+				if(scrolls>=slided){
+					$(".appear").hide();
+					$(".navFix").show();
+					$(".ltHead").addClass("navTop");
+				}else{
+					$(".appear").show();
+					$(".navFix").hide();
+					$(".ltHead").removeClass("navTop");
+				}
+			};
+		</script>
+	</body>
+</html>

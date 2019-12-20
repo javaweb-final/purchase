@@ -10,6 +10,15 @@ public enum Category {
         this.desc = desc;
     }
 
+    public static Category getEnumByType(int type){
+        for(Category bt:values()){
+            if(bt.code==type){
+                return bt;
+                }
+            }
+        return null;
+    }
+
     @EnumValue//标记数据库存的值是code
     private final int code;
     private final String desc;

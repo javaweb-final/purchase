@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>购物系统首页</title>
+		<link rel="stylesheet" type="text/css"  href="dist/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}" />
+		<link rel="stylesheet" type="text/css" href="css/animate.css" th:href="@{/css/animate.css}" />
+		<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}"/>
+    	<link rel="stylesheet" href="css/public.css" th:href="@{/css/public.css}"/>
+    	<link rel="stylesheet" href="css/write.css" th:href="@{/css/write.css}"/>
+	</head>
+
+	<body>
+	<div th:replace="common/header :: header"></div>
+	<!--导航部分 end-->
+
+	<!--最顶端轮播图片 begin-->
+	<div th:replace="common/carousel :: carousel"></div>
+		<!--最顶端轮播图片 end--> 
+
+		<div class="writeCon">
+    <div class="writeCon_head">
+        <p>发新帖</p>
+    </div>
+    <div class="writeCon_cen">
+        <form method="post">
+        <div class="writeMsg">
+            <input type="text" name="bbstitle" id="bbstitle" placeholder="请输入标题"/>
+        </div>
+        <div class="chooseDevide">
+            <div class="chooseDevide_left">
+                所在分类
+            </div>
+            <div class="chooseDevide_right">
+                <div class="nice-select" name="nice-select">
+                    <input type="text" value="请选择" readonly>
+                    <ul>
+                        <li class="click" data-val="">沪牌竞拍</li>
+                        <li class="click" data-val="">拍王助手</li>
+                        <li class="click" data-val="">深圳竞价摇号</li>
+                        <li class="click" data-val="">广州竞价摇号</li>
+                        <li class="click" data-val="">杭州竞价摇号</li>
+                        <li class="click" data-val="">天津竞价摇号</li>
+                        <li class="click" data-val="">增值服务</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+        	<textarea class="form-control" name="bbsinfo" id="bbsinfo" rows="10"></textarea>
+        </div>
+		<button class="btn btn-info btn-search " >
+			<a href="javascript:void(0)" th:onclick="update()">发表</a>
+		</button>
+		</form>
+    </div>
+</div>
+		<!-- <div class="container"-->
+		<hr>
+			<!--首页底部信息 begin-->
+
+	<div class="container">
+		<!--首页底部信息 begin-->
+		<div th:replace="common/footer :: footer"></div>
+	</div>
+	<!--end-->
+	<div th:replace="common/userModal :: userModal"></div>
+		<script src="js/jquery-1.8.3.min.js" th:src="@{'/public/js/jquery-1.8.3.min.js'}"></script>
+	<script src="dist/js/jquery.min.js" th:src="@{/dist/js/jquery.min.js}"></script>
+	<script src="js/carousel.js" th:src="@{/js/carousel.js}" type="text/javascript" charset="utf-8"></script>
+	<script src="dist/js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.min.js}"></script>
+	<script src="js/wow.js" th:src="@{/js/wow.js}"></script>
+	<script th:src="@{/js/login_reg.js}"></script>
+		<script th:inline="javascript">
+			var contextPath = [[${#request.getContextPath()}]];
+			var user = [[${session.user}]];
+		</script>
+		<script type="text/javascript">
+
+
+			function update() {
+				var bbsinfo = $("#bbsinfo").val();
+				var bbstitle=$("#bbstitle").val();
+				if(user == '' || user == null){
+					alert("请先登录！");
+					return ;
+				}
+				if (bbstitle==''){
+					alert("标题不能为空")
+					return ;
+				}
+				if (bbsinfo==''){
+					alert("内容不能为空");
+					return;
+				}
+
+				$.ajax({
+					type:"POST",
+					url:contextPath+ "/bbs/add",
+					data:{'bbsinfo':bbsinfo,'bbstitle':bbstitle},
+					success:function (data) {
+						if (data=='success'){
+							alert("发表成功");
+							window.location.href = contextPath + "/bbs/all";
+
+						}
+					}
+				});
+
+			}
+
+
+			// $('[name="nice-select"]').click(function(e){
+			// 	$('[name="nice-select"]').find('ul').hide();
+			// 	$(this).find('ul').show();
+			// 	e.stopPropagation();
+			// });
+			// $('[name="nice-select"] li').hover(function(e){
+			// 	$(this).toggleClass('on');
+			// 	e.stopPropagation();
+			// });
+			// $('[name="nice-select"] li').click(function(e){
+			// 	var val = $(this).text();
+			// 	var dataVal = $(this).attr("data-value");
+			// 	$(this).parents('[name="nice-select"]').find('input').val(val);
+			// 	$('[name="nice-select"] ul').hide();
+			// 	e.stopPropagation();
+			// });
+			// $(document).click(function(){
+			// 	$('[name="nice-select"] ul').hide();
+			// });
+
+
+		</script>
+</body>
+
+</html>
