@@ -170,39 +170,46 @@
 					</li>
 				</ol>
 
-			<!--猜您喜欢-->
+				<!--猜您喜欢-->
 				<div>
-					<span class="text-info"><span class="glyphicon glyphicon-heart"></span><span style="font-size: 20px; ">&nbsp;&nbsp;猜您喜欢</span></span>
+					<span class="text-info"><span class="glyphicon glyphicon-heart"></span><span
+							style="font-size: 20px; ">猜您喜欢</span></span>
 					<div class="row" id="love">
 						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
 							<div class="thumbnail">
-								<a href="details.html"><img src="images/cikehuakai.jpg " th:src="@{/images/cikehuakai.jpg}" style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<a href="details.html"  th:href="@{/prod/detail(id=${3})}"><img src="images/xiaodaolifencunzhijian.jpg "
+																								th:src="@{/images/bi.jpg}"
+																								style="height: 200px; " alt="通用的占位符缩略图 "></a>
 								<div class="caption ">
-									<h3>此刻花开</h3>
+									<h3>中性笔</h3>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
 							<div class="thumbnail ">
-								<a href="details.html"><img src="images/jindumanbu.jpg " th:src="@{/images/jindumanbu.jpg}" style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<a href="details.html" th:href="@{/prod/detail(id=${1})}"><img src="images/NO SECRETS.jpg "
+																							   th:src="@{/images/mate30.jpg}" style="height: 200px; "
+																							   alt="通用的占位符缩略图 "></a>
 								<div class="caption ">
-									<h3>京都漫步</h3>
+									<h3>华为mate30</h3>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-12 wow fadeInRight animated">
 							<div class="thumbnail ">
-								<a href="details.html"><img src="images/lapulasidemonv.jpg" th:src="@{/images/lapulasidemonv.jpg}" style="height: 200px; " alt="通用的占位符缩略图 "></a>
+								<a href="details.html"  th:href="@{/prod/detail(id=${2})}"><img src="images/maichanpinjiushimaiziji.jpg"
+																								th:src="@{/images/jiandao.jpg}"
+																								style="height: 200px; " alt="通用的占位符缩略图 "></a>
 								<div class="caption ">
-									<h3>拉普拉斯的魔女</h3>
+									<h3>剪刀</h3>
 								</div>
 							</div>
 						</div>
 						<div>
 							<ul class="pager ">
 								<li>
-									<a href="#" onclick="pageUp() ">&larr;上一页</a>
-									<a href="#" onclick="pageDown() ">下一页 &rarr;</a>
+									<a href="# " onclick="pageUp() ">&larr;上一页</a>
+									<a href="# " onclick="pageDown() ">下一页 &rarr;</a>
 								</li>
 							</ul>
 						</div>
