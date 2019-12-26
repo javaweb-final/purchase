@@ -1,7 +1,6 @@
 package com.javaweb.purchase.entity;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
