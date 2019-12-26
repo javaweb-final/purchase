@@ -1,6 +1,8 @@
 package com.javaweb.purchase.web;
 
 import com.javaweb.purchase.entity.User;
+import com.javaweb.purchase.entity.UserCartVo;
+import com.javaweb.purchase.service.CartService;
 import com.javaweb.purchase.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,8 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CartService cartService;
     //验证用户名是否存在
     @ResponseBody
     @RequestMapping("/checkUserName")

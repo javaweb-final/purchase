@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.javaweb.purchase.entity.CartVo;
 import com.javaweb.purchase.entity.User;
+import com.javaweb.purchase.entity.UserCartVo;
 import com.javaweb.purchase.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Service
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpSession;
 public class UserService extends ServiceImpl<UserMapper,User> {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CartService cartService;
 
     /**
      * 验证用户的存在性
@@ -45,6 +50,11 @@ public class UserService extends ServiceImpl<UserMapper,User> {
             //判断密码
             if(loginUser.getPassword().equals(user.getPassword())){
                 session.setAttribute("user",user);
+
+                List<CartVo> cartVos = cartService.findCartByUser(user.getId());
+                UserCartVo userCartVo = cartService.wrapperCart(cartVos);
+                session.setAttribute("userCartInfo",userCartVo);
+
                 return "100";
             } else {
                 return "102";//密码不正确
