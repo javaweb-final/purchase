@@ -1,4 +1,4 @@
-package com.javaweb.purchase.web;
+﻿package com.javaweb.purchase.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -45,7 +45,6 @@ public class EvaluateController {
         String evaluateinfo=request.getParameter("evaluateinfo");
         //判断是否已经在购物车存在该记录
         List<UserOrderVo> l=evaluateService.findUserOrder(id,productId);
-
         if(l.size() == 0){
             return "100";
         } else {
@@ -56,9 +55,7 @@ public class EvaluateController {
             evaluateService.save(evaluate);
             return "101";
         }
-
     }
-
 //    public String getEvaluateData(Model model,Integer id){
 //        id=2;
 //        QueryWrapper<Evaluate> queryWrapper=new QueryWrapper<>();
