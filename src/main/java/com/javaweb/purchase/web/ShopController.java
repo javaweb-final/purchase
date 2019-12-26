@@ -136,4 +136,21 @@ public class ShopController {
         return "shop_detail";
 
     }
+    @RequestMapping("/addsho")
+    public String addsho(){
+        return "shopreg";
+    }
+    @ResponseBody
+    @RequestMapping("/addshop")
+    public String addshop(HttpServletRequest request){
+        String name=request.getParameter("name");
+        String pwd=request.getParameter("pwd");
+        String shopname=request.getParameter("shopname");
+        Shop shop=new Shop();
+        shop.setUsername(name);
+        shop.setShopname(shopname);
+        shop.setPassword(pwd);
+        shopService.save(shop);
+        return "success";
+    }
 }

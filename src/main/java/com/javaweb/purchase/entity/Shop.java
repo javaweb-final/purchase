@@ -1,5 +1,7 @@
 package com.javaweb.purchase.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +10,7 @@ import lombok.EqualsAndHashCode;
 @TableName(value = "boss")
 @EqualsAndHashCode(callSuper = false)
 public class Shop {
+    @TableId(type = IdType.AUTO)
     private Integer id;
     private String shopname;
     private String username;

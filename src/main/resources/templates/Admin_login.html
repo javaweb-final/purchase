@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理系统</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" th:href="@{/css/amazeui.min.css}"/>
+    <style>
+        .header {
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+        .header p {
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <div class="am-g">
+        <h1>
+            购物网
+        </h1>
+        <p>
+            超级管理登陆通道
+        </p>
+    </div>
+    <hr/>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-user"></span>登录
+                </div>
+                <div class="panel-body">
+                    <form  method="POST" name="loginForm">
+                        <div class="form-group">
+                            <label>用户名</label> <input type="text" class="form-control" name="name" id="name" placeholder="请输入用户名">
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label> <input type="password" class="form-control" name="pwd" id="pwd" placeholder="请输入密码">
+                        </div>
+                        <div class="form-group">
+                            <label>验证码</label> <input type="text" class="form-control" name="flag" id="flag" placeholder="请输入密码">
+                        </div>
+                        <button type="submit" class="btn btn-primary"
+                                th:onclick="checkForm()">登录</button>
+                        <button type="submit" class="btn btn-primary"
+                                th:onclick="flag1()">发送验证码</button>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="rejister.jsp" th:href="@{/super/addsup}">没有账号？立即注册</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3.min.js" th:src="@{'/public/js/jquery-1.8.3.min.js'}"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+
+</script>
+<script th:inline="javascript">
+    var contextPath = [[${#request.getContextPath()}]];
+    var user = [[${session.user}]];
+</script>
+<script type="text/javascript">
+    function checkForm() {
+        var name = $("#name").val();
+        var pwd=$("#pwd").val();
+        var flag=$("#flag").val();
+        if (name==''){
+            alert("用户名不能为空")
+            return ;
+        }
+        if (pwd==''){
+            alert("密码不能为空");
+            return;
+        }
+        if (flag=='') {
+            alert("验证码为空");
+            return;
+        }
+        $.ajax({
+            type:"POST",
+            url:contextPath+ "/super/loginCheck",
+            data:{'name':name,'pwd':pwd,'flag':flag},
+            success:function (data) {
+                if (data=='100'){
+                    alert("登陆失败");
+                    window.location.href = contextPath + "/super/login";
+
+                }else{
+                    alert("登陆成功");
+                    window.location.href= contextPath+"/super/shop";
+                }
+            }
+        });
+    }
+    function flag1() {
+        var name = $("#name").val();
+        if (name==''){
+            alert("用户名不能为空")
+            return ;
+        }
+        $.ajax({
+            type:"POST",
+            url:contextPath+ "/super/getflag",
+            data:{'name':name},
+            success:function (data) {
+                if (data=='100'){
+                    alert("用户名不存在")
+                } else{
+                    alert("验证码发送成功");
+                }
+
+            }
+        });
+    }
+</script>
+</html>
